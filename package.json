@@ -16,6 +16,7 @@
     "test": "vitest"
   },
   "keywords": [
+    "cli",
     "aws",
     "ses",
     "email-templates",
