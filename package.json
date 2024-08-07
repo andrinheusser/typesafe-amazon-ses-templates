@@ -1,0 +1,37 @@
+{
+  "name": "typesafe-amazon-ses-templates",
+  "version": "0.0.1",
+  "description": "Manage aws ses email templates with type safety",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrinheusser/typesafe-amazon-ses-templates.git"
+  },
+  "main": "distribution/index.js",
+  "types": "distribution/index.d.ts",
+  "bin": {
+    "typesafe-amazon-ses-templates": "distribution/cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [
+    "aws",
+    "ses",
+    "email-templates",
+    "typescript"
+  ],
+  "author": "Andrin Heusser",
+  "license": "MIT",
+  "devDependencies": {
+    "@sindresorhus/tsconfig": "^6.0.0",
+    "@types/node": "^22.1.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.624.0",
+    "commander": "^12.1.0",
+    "handlebars": "^4.7.8"
+  }
+}

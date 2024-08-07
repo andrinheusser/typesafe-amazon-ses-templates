@@ -1,0 +1,12 @@
+{
+    "exclude": [
+        "./test",
+        "./distribution",
+        "**/*.test.ts",
+        "./node_modules"
+    ],
+    "extends": "@sindresorhus/tsconfig",
+    "compilerOptions": {
+        "declaration": true
+    }
+}
