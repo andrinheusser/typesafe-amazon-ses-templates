@@ -14,7 +14,6 @@ interface Options {
 export default async function run(opts: Options) {
   const templates = (await indexTemplates(opts.templateFolder)).map(
     ({ name, subject, html, text }) => {
-      console.log(name, subject, html, text);
       const variables = new Set([
         ...extractHandlebarsVariables(subject),
         ...extractHandlebarsVariables(html),

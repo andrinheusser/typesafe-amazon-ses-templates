@@ -34,10 +34,8 @@ function extractFromBody(
         variables.push(join(node.path.original));
       }
     } else if (isBlockStatement(node)) {
-      console.log(JSON.stringify(node, undefined, 2));
       const what = node.params[0];
       if (what && isPathExpression(what)) {
-        console.log(what.original);
         variables.push(
           ...extractFromBody(node.program.body, join(what.original))
         );
