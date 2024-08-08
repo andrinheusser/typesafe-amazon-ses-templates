@@ -1,4 +1,5 @@
 import { createTsInterfaceFromVariables } from "./create.ts.interface.from.variables.js";
+import { createTsTypeForTemplateNames } from "./create.ts.type.for.template.names.js";
 import { extractHandlebarsVariables } from "./extract.handlebars.variables.js";
 import { indexTemplates } from "./index.templates.js";
 import { syncRemoteTemplates } from "./sync.remote.templates.js";
@@ -35,6 +36,7 @@ export default async function run(opts: Options) {
   await syncRemoteTemplates(templates);
   writeInterfaces(
     templates.map((t) => t.interface),
+    createTsTypeForTemplateNames(templates.map(t => t.name)),
     opts.outFile
   );
 }
