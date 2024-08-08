@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 
+const warning = `// This file is auto-generated. Do not modify it manually.`;
+
 export const writeInterfaces = (
   interfaces: string[],
   templateNameType: string,
@@ -10,5 +12,8 @@ export const writeInterfaces = (
   if (outFolder && !fs.existsSync(outFolder)) {
     fs.mkdirSync(outFolder);
   }
-  fs.writeFileSync(outFile, [templateNameType, ...interfaces].join("\n\n"));
+  fs.writeFileSync(
+    outFile,
+    [warning, templateNameType, ...interfaces].join("\n")
+  );
 };
