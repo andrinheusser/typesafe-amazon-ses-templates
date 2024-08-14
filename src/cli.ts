@@ -9,7 +9,7 @@ import run from "./index.js";
 const program = new Command();
 
 program
-  .version("0.0.5")
+  .version("0.0.6")
   .description(
     "A CLI tool for managing AWS SES email templates and generating TypeScript interfaces for them."
   );
