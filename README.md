@@ -23,6 +23,25 @@ npx typesafe-amazon-ses-templates --template-folder ./path/to/templates --out-fi
 
 This tool will never delete any remote SES templates.
 
+### Output
+
+The generated file will contain an interface for each template in the folder.
+It will also generate a union you can discriminate against, eg:
+
+```typescript
+export type AwsSesTemplatedEmail =
+  | {
+      _templateName: "template1";
+      subject: string;
+      person: { name: string; email: string };
+    }
+  | {
+      _templateName: "template2";
+      subject: string;
+      product: { id: string; name: string };
+    };
+```
+
 ## Folder Structure
 
 Within the template folder, you should have a folder for each template. The folder name will be used as the template name.
