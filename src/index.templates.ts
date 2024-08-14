@@ -1,34 +1,34 @@
-import { readdirSync, readFileSync } from "fs";
+import { readdirSync, statSync } from "fs";
 import { readFile } from "fs/promises";
 import path from "path";
 
-export async function indexTemplates(templFolder: string) {
-  const templates: {
+const getTemplates = async (folder: string) => {
+  const [subject, html, text] = await Promise.all([
+    readFile(path.join(folder, "subject.txt"), "utf-8"),
+    readFile(path.join(folder, "html.html"), "utf-8"),
+    readFile(path.join(folder, "text.txt"), "utf-8"),
+  ]);
+  return { subject, html, text };
+};
+
+export async function indexTemplates(templFolder: string): Promise<
+  {
     name: string;
     subject: string;
     html: string;
     text: string;
-  }[] = [];
-  const directories = readdirSync(templFolder);
-  for (const dir of directories) {
-    const subject = readFileSync(
-      path.join(templFolder, dir, "subject.txt"),
-      "utf-8"
-    );
-    const html = readFileSync(
-      path.join(templFolder, dir, "html.html"),
-      "utf-8"
-    );
-    const text = await readFile(
-      path.join(templFolder, dir, "text.txt"),
-      "utf-8"
-    );
-    templates.push({
-      name: dir,
-      subject,
-      html,
-      text,
-    });
-  }
-  return templates;
+  }[]
+> {
+  const directories = readdirSync(templFolder).filter((dir) =>
+    statSync(path.join(templFolder, dir)).isDirectory()
+  );
+
+  return Promise.all(
+    directories.map(async (dir) => {
+      return {
+        name: dir,
+        ...(await getTemplates(path.join(templFolder, dir))),
+      };
+    })
+  );
 }
