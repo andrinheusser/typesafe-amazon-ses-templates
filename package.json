@@ -1,6 +1,6 @@
 {
   "name": "typesafe-amazon-ses-templates",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Manage aws ses email templates with type safety",
   "repository": {
     "type": "git",

@@ -1,10 +1,20 @@
 import fs from "fs";
 import path from "path";
+import { InterfaceToWrite } from "./create.ts.interface.from.variables.js";
 
+const eslintDisable =
+  "/* eslint-disable */";
 const warning = `// This file is auto-generated. Do not modify it manually.`;
 
+export const union = (interfaces: InterfaceToWrite[]) => {
+  return `export type AwsSesTemplatedEmail = 
+  ${interfaces
+    .map((i) => `{\n_templateName: "${i.name}";\n${i.content}\n}`)
+    .join(" | ")};`;
+};
+
 export const writeInterfaces = (
-  interfaces: string[],
+  interfaces: InterfaceToWrite[],
   templateNameType: string,
   outFile: string
 ) => {
@@ -14,6 +24,12 @@ export const writeInterfaces = (
   }
   fs.writeFileSync(
     outFile,
-    [warning, templateNameType, ...interfaces].join("\n")
+    [
+      eslintDisable,
+      warning,
+      templateNameType,
+      union(interfaces),
+      ...interfaces.map((i) => i.code),
+    ].join("\n")
   );
 };

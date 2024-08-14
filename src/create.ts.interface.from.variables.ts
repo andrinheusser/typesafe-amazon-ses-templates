@@ -2,15 +2,26 @@
 type Obj = {
   [key: string]: Obj | null;
 };
+export type InterfaceToWrite = {
+  name: string;
+  content: string;
+  code: string;
+};
 export function createTsInterfaceFromVariables(
   name: string,
   variables: string[],
   { prefix, suffix }: { prefix: string; suffix: string }
-) {
+): InterfaceToWrite {
   const varObj = variablesToObject(variables);
 
-  return `
-export interface ${prefix}${name}${suffix} {\n${writeLevel(varObj)}\n}`;
+  const content = writeLevel(varObj);
+
+  return {
+    name,
+    content,
+    code: `
+export interface ${prefix}${name}${suffix} {\n${content}\n}`,
+  };
 }
 
 export function writeLevel(obj: Obj, indent = 1) {
